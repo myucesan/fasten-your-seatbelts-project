@@ -1,5 +1,10 @@
 <?php
-
+/*
+Gemaakt door Alfred Espinosa Encarnación
+Dit is een PHP mailhandler de code ontvangt gegevens vanuit de index.php en legt dit vast in meerdere variables.
+Deze gegevens worden gebruikt bij het versturen van een mail naar Corendon.
+De ontvanger van de mail staat nu ingesteld op alfredez008@gmail.com.
+*/
 if (isset($_POST["email"])) {
 	
 	$senderName = $_POST['name'];

@@ -22,7 +22,6 @@ h1 {
 }
 
 
-
 .login {
     display: inline-block;
     text-align: center;
@@ -76,3 +75,5 @@ hr.divider {
 .map-container iframe.clicked {
   pointer-events: auto;
 }
+
+
