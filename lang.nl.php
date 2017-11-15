@@ -21,12 +21,12 @@ $language["ABOUT_TEXT"] = "Op deze website kan je de foto's inzien die u op de f
 $language["CONTACT_TITLE"] = "Contact";
 $language["CONTACT_PHONE"] = "Telefoon:";
 $language["CONTACT_EMAIL"] = "Email";
-$language["CONTACT_ADDRESS"] = "Address:";
-$language["CONTACT_FORM_TITLE"] = "CONTACT FORMULIER";
+$language["CONTACT_ADDRESS"] = "Adres:";
+$language["CONTACT_FORM_TITLE"] = "CONTACTFORMULIER";
 $language["CONTACT_FORM_NAME"] = "Naam";
-$language["CONTACT_FORM_EMAIL"] = "Email Address";
-$language["CONTACT_FORM_PHONE"] = "Telefoon Nummer";
+$language["CONTACT_FORM_EMAIL"] = "Emailadres";
+$language["CONTACT_FORM_PHONE"] = "Telefoonnummer";
 $language["CONTACT_FORM_MESSAGE"] = "Bericht";
-$language["ERR_NO_CODE"] = "Geen code ingevoerd";
+$language["ERR_NO_CODE"] = "Er is geen code ingevoerd";
 
 ?>
