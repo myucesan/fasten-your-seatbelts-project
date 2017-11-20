@@ -2,7 +2,7 @@
 //Engelse vertaling
 $language["SITE_TITLE"] = "Dreambox";
 $language["HOLIDAY_PHOTO_VIEWER"] = "Holiday Photo Viewer";
-$language["HOME"] = "Home;";
+$language["HOME"] = "Home";
 $language["ABOUT"] = "About";
 $language["CONTACT"] = "Contact";
 $language["WELCOME"] = "Welcome to the Holiday Photo Viewer";
@@ -13,7 +13,7 @@ $language["MAP_PHOTO_BOOTH"] = "Map of the Photo Booths";
 $language["COPYRIGHT"] = "Copyright © Corendon | Made by Resort5 2017";
 $language["SLIDE1"] = "First Slide";
 $language["SLIDE1_CAPTION"] = "Memories to never forget";
-$language["SLIDE2"] = "Second Slide";
+$language["SLIDE2"] = "Sedond Slide";
 $language["SLIDE2_CAPTION"] = "Wheather that's always with you";
 $language["SLIDE3"] = "Third Slide";
 $language["SLIDE3_CAPTION"] = "Corendon and holidays are one and the same";

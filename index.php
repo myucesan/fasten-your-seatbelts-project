@@ -51,7 +51,24 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav mx-auto">
-            <li class="nav-item active px-lg-4">
+		  <?php
+		  if($_SESSION["lang"]){
+			  ?>
+			  <li class="nav-item active px-lg-4">
+              <a class="nav-link text-uppercase text-expanded" href="index.php?lang=<?php echo $_SESSION['lang'];?>"><?= $language["HOME"]; ?>
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item px-lg-4">
+              <a class="nav-link text-uppercase text-expanded" href="about.php?lang=<?php echo $_SESSION['lang'];?>"><?= $language["ABOUT"]; ?></a>
+            </li>
+            <li class="nav-item px-lg-4">
+              <a class="nav-link text-uppercase text-expanded" href="contact.php?lang=<?php echo $_SESSION['lang'];?>"><?= $language["CONTACT"]; ?></a>
+            </li>
+			  <?php
+		  }else{
+			  ?>
+			  <li class="nav-item active px-lg-4">
               <a class="nav-link text-uppercase text-expanded" href="index.php"><?= $language["HOME"]; ?>
                 <span class="sr-only">(current)</span>
               </a>
@@ -62,6 +79,10 @@
             <li class="nav-item px-lg-4">
               <a class="nav-link text-uppercase text-expanded" href="contact.php"><?= $language["CONTACT"]; ?></a>
             </li>
+			  <?php
+		  }
+		  ?>
+            
           </ul>
         </div>
       </div>

@@ -18,21 +18,24 @@
    if(!isset($_SESSION['login_user'])){
       header("location:admin.php");
    }
-	$sql = "SELECT FROM sessie";
-	$result = mysqli_query($conn, $sql);
-	$iets= mysqli_fetch_assoc($result);
-	$sessies = $iets['value_sum'];
+	$sql = "SELECT * FROM sessie";
+	$result= mysqli_query($conn,$sql); 
+	$sessies = mysqli_num_rows($result);
 	$sql = "SELECT SUM(aantal) FROM sessie";
-	$fotos = mysqli_query($conn, $sql);
-	$gemfotos = fotos/sessies;
-	$sql = "SELECT SUM(tempratuur) FROM sessie";
-	$temp = mysqli_query($conn, $sql);
-	$temp = $temp / $sessies;
+	$result= mysqli_query($conn,$sql); 
+	$row = mysqli_fetch_row($result);
+	$fotos = (int)$row[0];
+	$gemfotos = $fotos/$sessies;
+	$sql = "SELECT SUM(temperatuur) FROM sessie";
+	$result = mysqli_query($conn, $sql);
+	$row= mysqli_fetch_row($result);
+	$temp = (int)$row[0] / $sessies;
 	$sql = "select AVG(cast(tijd as time)) from sessie";
-	$tijd = mysqli_query($conn, $sql);
-	$tijd1 = substr($tijd,0,1);	
-	$tijd2 = substr($tijd,2,3);	
-	echo var_dump($sessies);
+	$result = mysqli_query($conn, $sql);
+	$row = mysqli_fetch_row($result);
+	$tijd = $row[0];
+	$tijd1 = substr($tijd,0,2);	
+	$tijd2 = substr($tijd,2,2);	
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -64,28 +67,39 @@
     <div class="tagline-lower text-center text-expanded text-shadow text-uppercase text-white mb-5 d-none d-lg-block">Admin</div>
 
     <div class="container">
+	
+	  <div class="bg-faded p-4 my-4">
+        <div class="row">
+			<h4>Opdeze pagina kan je de gemidelde gegevens en verzamel data van photobooth bekijken</h4>
+        </div>
+      </div>
 
       <div class="bg-faded p-4 my-4">
         <div class="row">
 		<!-- tabel -->
 			<table class="tabel">
 			  <tr>
-				<th>Aantal Foto's</th>
 				<th>Aatnal Sessie's</th> 
-				<th>Gemmidelde tijdstip</th>
+				<th>Aantal Foto's</th>
+				<th>Gemmideld aantal<br> foto's per sessie</th>
 				<th>Gemmidelde tempratuur</th>
-				<th>Gemmidelde aantal foto's per sessie</th>
+				<th>Gemmideld tijdstip <br>voor genomen foto's </th>
 			  </tr>
 			  <tr>
 			    <td><?php echo $sessies;?></td>
-			    <td></td>
-			    <td></td>
-			    <td></td>
-			    <td></td>
+			    <td><?php echo $fotos;?></td>
+			    <td><?php echo $gemfotos;?></td>
+			    <td><?php echo (int)$temp;?></td>
+			    <td><?php echo $tijd1;?>:<?php echo $tijd2;?></td>
 			  </tr>
 			</table>
         </div>
       </div>
+	  <a href="logout.php" class="logout" >
+			logout
+	  </a>
+	  
+	  
     </div>
 
     <!-- Bootstrap core JavaScript -->
