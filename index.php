@@ -38,8 +38,8 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light bg-faded py-lg-4">
 	<ul class="languagepicker roundborders large">
-	<a href="?lang=frys" <?php if($_SESSION["lang"] == 'nl'){?> style="color:#ff9900;" <?php } ?>><li><img src="http://i65.tinypic.com/2d0kyno.png"/>Frysk</li></a>
-	<a href="?lang=nl" <?php if($_SESSION["lang"] == 'frys'){?> style="color:#ff9900;" <?php } ?>><li><img src="http://i65.tinypic.com/2d0kyno.png"/>nederlands</li></a>
+	<a href="?lang=nl" <?php if($_SESSION["lang"] == 'nl'){?> style="color:#ff9900;" <?php } ?>><li><img src="http://i65.tinypic.com/2d0kyno.png"/>Nederlands</li></a>
+	<a href="?lang=Frys" <?php if($_SESSION["lang"] == 'frys'){?> style="color:#ff9900;" <?php } ?>><li><img src="http://i65.tinypic.com/2d0kyno.png"/>Frysk</li></a>
 	<a href="?lang=en" <?php if($_SESSION["lang"] == 'en'){?> style="color:#ff9900;" <?php } ?>><li><img src="http://i64.tinypic.com/fd60km.png"/>English</li></a>
 	<a href="?lang=de" <?php if($_SESSION["lang"] == 'de'){?> style="color:#ff9900;" <?php } ?>><li><img src="http://i63.tinypic.com/10zmzyb.png"/>Deutsch</li></a>
 	<a href="?lang=es" <?php if($_SESSION["lang"] == 'es'){?> style="color:#ff9900;" <?php } ?>><li><img src="http://i68.tinypic.com/avo5ky.png"/>Español</li></a>
