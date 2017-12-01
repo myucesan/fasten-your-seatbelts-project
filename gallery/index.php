@@ -63,6 +63,10 @@ echo "</div>";
 			downloads.href = newURL;
 			downloads.download = newURL;
 
+        /*
+            we posten de url van de api, dat de foto bevat plus het id naar een download.php script.
+            daar wordt de bewerkte foto opgeslagen in de image map
+        */
 		window.open("download.php?name=" + newURL + "&id=" + imageID,'_blank' );
             var img = document.getElementById(imageID);
             img.src = newURL;
@@ -126,6 +130,10 @@ echo "</div>";
 			if (mysqli_num_rows($result) > 0) {
 				// output data of each row
 			echo "<div class='gallery cf ' data-pswp-uid='1'>";
+			
+			/*
+			    In deze while loop wordt elke foto dat bij de code hoort weergeven
+			*/
 				while($row = mysqli_fetch_assoc($result)) {
 					// echo "id: " . $row["id"]. " - path: " . $row["path"]. " " . $row["locatie"]. "<br>";
 					//echo "<a href='#'>";
