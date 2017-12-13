@@ -39,7 +39,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-faded py-lg-4">
 	<ul class="languagepicker roundborders large">
 	<a href="?lang=nl" <?php if($_SESSION["lang"] == 'nl'){?> style="color:#ff9900;" <?php } ?>><li><img src="http://i65.tinypic.com/2d0kyno.png"/>Nederlands</li></a>
-	<a href="?lang=frys" <?php if($_SESSION["lang"] == 'frys'){?> style="color:#ff9900;" <?php } ?>><li><img src="http://i65.tinypic.com/2d0kyno.png"/>Frysk</li></a>
+	<a href="?lang=Frys" <?php if($_SESSION["lang"] == 'frys'){?> style="color:#ff9900;" <?php } ?>><li><img src="http://i65.tinypic.com/2d0kyno.png"/>Frysk</li></a>
 	<a href="?lang=en" <?php if($_SESSION["lang"] == 'en'){?> style="color:#ff9900;" <?php } ?>><li><img src="http://i64.tinypic.com/fd60km.png"/>English</li></a>
 	<a href="?lang=de" <?php if($_SESSION["lang"] == 'de'){?> style="color:#ff9900;" <?php } ?>><li><img src="http://i63.tinypic.com/10zmzyb.png"/>Deutsch</li></a>
 	<a href="?lang=es" <?php if($_SESSION["lang"] == 'es'){?> style="color:#ff9900;" <?php } ?>><li><img src="http://i68.tinypic.com/avo5ky.png"/>Español</li></a>
@@ -51,7 +51,24 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav mx-auto">
-            <li class="nav-item active px-lg-4">
+		  <?php
+		  if($_SESSION["lang"]){
+			  ?>
+			  <li class="nav-item active px-lg-4">
+              <a class="nav-link text-uppercase text-expanded" href="index.php?lang=<?php echo $_SESSION['lang'];?>"><?= $language["HOME"]; ?>
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item px-lg-4">
+              <a class="nav-link text-uppercase text-expanded" href="about.php?lang=<?php echo $_SESSION['lang'];?>"><?= $language["ABOUT"]; ?></a>
+            </li>
+            <li class="nav-item px-lg-4">
+              <a class="nav-link text-uppercase text-expanded" href="contact.php?lang=<?php echo $_SESSION['lang'];?>"><?= $language["CONTACT"]; ?></a>
+            </li>
+			  <?php
+		  }else{
+			  ?>
+			  <li class="nav-item active px-lg-4">
               <a class="nav-link text-uppercase text-expanded" href="index.php"><?= $language["HOME"]; ?>
                 <span class="sr-only">(current)</span>
               </a>
@@ -62,6 +79,10 @@
             <li class="nav-item px-lg-4">
               <a class="nav-link text-uppercase text-expanded" href="contact.php"><?= $language["CONTACT"]; ?></a>
             </li>
+			  <?php
+		  }
+		  ?>
+            
           </ul>
         </div>
       </div>
@@ -137,7 +158,7 @@ max-height:30%;" >
         <h2 class="text-center text-lg text-uppercase my-0">
           <strong><?= $language["MAP_PHOTO_BOOTH"]; ?></strong>
         </h2>
-        <iframe frameborder=0 style='width:100%;height:500px;' src='//www.zeemaps.com/pub?group=2728497'> </iframe>
+        <iframe frameborder=0 style='width:100%;height:500px;' src='//www.zeemaps.com/pub?group=2782946'> </iframe>
         <hr class="divider">
       </div>
 

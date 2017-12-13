@@ -58,7 +58,7 @@
 			  ?>
 			  <li class="nav-item active px-lg-4">
               <a class="nav-link text-uppercase text-expanded" href="index.php?lang=<?php echo $_SESSION['lang'];?>"><?= $language["HOME"]; ?>
-                <span class="sr-only">(current)</span>
+                
               </a>
             </li>
             <li class="nav-item px-lg-4">
@@ -66,6 +66,7 @@
             </li>
             <li class="nav-item px-lg-4">
               <a class="nav-link text-uppercase text-expanded" href="contact.php?lang=<?php echo $_SESSION['lang'];?>"><?= $language["CONTACT"]; ?></a>
+              <span class="sr-only">(current)</span>
             </li>
 			  <?php
 		  }else{
