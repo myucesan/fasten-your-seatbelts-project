@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <?php
-	// include language configuration file based on selected language
+	// inclusief taalconfiguratiebestand op basis van geselecteerde taal
 	require_once("languages/translator.php");
 	require_once("languages/lang.".$_SESSION["lang"].".php");
 ?>
@@ -15,24 +15,21 @@
 
       <title><?= $language["SITE_TITLE"]; ?></title>
 
-    <!-- Bootstrap core CSS -->
+    <!-- Bootstrap kern CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Custom fonts for this template -->
+    <!-- Aangepaste lettertypen voor dit template -->
     <link href="fonts/font.ttf"   rel="stylesheet" type="text/css">
     <link href="fonts/font2.ttf"   rel="stylesheet" type="text/css">
 
-    <!-- Custom styles for this template -->
+    <!-- Aangepaste stijlen voor dit template -->
     <link href="css/business-casual.css" rel="stylesheet">
 	<link href="css/lang.css" rel="stylesheet">
 
   </head>
 
   <body>
-    <!-- START LANGUAGE PICKER -->
-
-
-    <!-- END LANGUAGE PICKER -->
+    <!-- Start van de taalkiezer -->
 
     <div class="tagline-upper text-center text-heading text-shadow text-white mt-5 d-none d-lg-block">Corendon</div>
     <div class="tagline-lower text-center text-expanded text-shadow text-uppercase text-white mb-5 d-none d-lg-block"><?= $language["HOLIDAY_PHOTO_VIEWER"]; ?></div>
@@ -54,6 +51,9 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav mx-auto">
+              
+             <!-- Einde van de taalkiezer --> 
+              
             <?php
 		  if($_SESSION["lang"]){
 			  ?>
@@ -109,7 +109,6 @@
         </div>
       </div>
     </div>
-    <!-- /.container -->
 
     <footer class="bg-faded text-center py-5">
       <div class="container">
@@ -117,7 +116,7 @@
       </div>
     </footer>
 
-    <!-- Bootstrap core JavaScript -->
+    <!-- Bootstrap kern JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/popper/popper.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
