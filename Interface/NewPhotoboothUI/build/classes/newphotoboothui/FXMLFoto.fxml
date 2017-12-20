@@ -5,7 +5,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="newphotoboothui.FXMLDocumentController">
    <children>
-      <Button fx:id="fotoButton" layoutX="469.0" layoutY="150.0" mnemonicParsing="false" onAction="#handleButtonAction" style="-fx-background-radius: 1000px; -fx-min-height: 100px; -fx-min-width: 100px;" text="Foto" />
+      <Button fx:id="fotoButton" layoutX="469.0" layoutY="150.0" mnemonicParsing="false" onAction="#handleButtonAction" style="-fx-background-radius: 1000px; -fx-min-height: 100px; -fx-min-width: 100px; -fx-background-image: url(&quot;file:C:/Users/Koen/Documents/PhotoboothUI/Images/CameraIcon2.png&quot;); -fx-background-position: center; -fx-background-size: 100% 100%;" />
       <Button layoutX="90.0" layoutY="361.0" mnemonicParsing="false" text="Omlaag" />
       <Button layoutX="534.0" layoutY="361.0" mnemonicParsing="false" text="Rechts" />
       <Button layoutX="14.0" layoutY="361.0" mnemonicParsing="false" text="Omhoog" />
