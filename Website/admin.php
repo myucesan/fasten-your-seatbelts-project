@@ -1,15 +1,16 @@
 <?php
+// in dit document kunnen wij en uiteindelijk corendon wat e gebeurt met de photobooth, hoeveel foto's er zijn genomen hoeveel per dag etc...
 	require_once("db.php");
 	session_start();
 	$conn = new mysqli($dbserver,$dbuser,$dbpass,$dbname);
-	// check conection
+	// controleer de connectie 
 	if ($conn->connect_error){
 		die("connection failed: " . $conn->connect_error);
 	}
 	
 	   if($_SERVER["REQUEST_METHOD"] == "POST") {
-      // username and password sent from form 
-    
+      // gebruikersnaam en wachtwoord verzonden vanuit formulier 
+        
       $myusername = mysqli_real_escape_string($conn,$_POST['username']);
       $mypassword = mysqli_real_escape_string($conn,$_POST['password']); 
       $sql = "SELECT id FROM admin WHERE username = '$myusername' and password= '$mypassword'";
@@ -18,15 +19,15 @@
       $active = $row['active'];
       
       $count = mysqli_num_rows($result);
-      
-      // If result matched $myusername and $mypassword, table row must be 1 row
-		
+	  // als $myusername en $mypassword overeenkomen, dan moet het rij 1 in de tabel zijn.
+	  
       if($count == 1) {
         $_SESSION['login_user'] = $myusername;
         header('Location: analyse.php');
       }else {
          $error = "Your Login Name or Password is invalid";
 		 echo "$error";
+		 // dit krijg je te zien wanneer je het verkeerde wachtwoord en/of gebruikersnaam invoert.
       }
    }
 ?>
@@ -45,11 +46,9 @@
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Custom fonts for this template -->
+    <!-- Aangepaste lettertypen voor dit template-->
     <link href="fonts/font.ttf"   rel="stylesheet" type="text/css">
     <link href="fonts/font2.ttf"   rel="stylesheet" type="text/css">
-
-    <!-- Custom styles for this template -->
     <link href="css/business-casual.css" rel="stylesheet">
 
   </head>
@@ -90,7 +89,7 @@
     </div>
 
 
-    <!-- Bootstrap core JavaScript -->
+    <!-- Bootstrap kern JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/popper/popper.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.min.js"></script>

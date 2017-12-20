@@ -5,6 +5,7 @@
  */
 package potoboothsession;
 
+import java.io.IOException;
 import java.util.*;
 import java.sql.*;
 import java.time.LocalDateTime;
@@ -15,24 +16,41 @@ import java.time.format.DateTimeFormatter;
  *
  * @author Alfred Espinosa
  */
+import java.util.*;
 public class PotoboothSession {
 
+    private static Scanner in;
     /**
      * @param args the command line arguments
      * @throws java.sql.SQLException
      * @throws java.lang.ClassNotFoundException
+     * @throws java.io.IOException
      */
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
+    
+    public static void main(String[] args) throws SQLException, ClassNotFoundException, IOException {
         // TODO code application logic here
 
         final String CODE = randomAlphaNumeric();
         final String CURRENTDATETIME = currentDateTime();
-        
-        JDBC.Open();
+        in = new Scanner(System.in);
+        String email = null;
+            
+        //JDBC.Open();
         //JDBC.Insert(CODE, CURRENTDATETIME);
-        JDBC.Remove();
-        JDBC.Close();
+        //JDBC.Remove();
+        
+        
+        //JDBC.Close();
 
+        
+        
+        System.out.println("Please enter your email: ");
+        email = in.next();
+        
+        if (email != null) {
+            SendEmail.mail(email);
+        }
+        
         System.out.println(CODE);
         System.out.println(CURRENTDATETIME);
 

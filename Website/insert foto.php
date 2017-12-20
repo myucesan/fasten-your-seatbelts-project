@@ -1,4 +1,3 @@
-
 <?php
 /*
 Gemaakt door Alfred Espinosa Encarnación
@@ -11,7 +10,7 @@ Voordat de foto opgeslagen wordt, wordt er eerst een code gegenereed en worden d
 require_once("db.php");
 
 $conn = new mysqli($dbserver, $dbuser, $dbpass, $dbname);
-// Check connection
+// Controleer de connectie.
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
@@ -29,7 +28,6 @@ foreach($files1 as $file){
 
     if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
-            //echo $row['path'] . "<br>";
         }
     }else{
 
