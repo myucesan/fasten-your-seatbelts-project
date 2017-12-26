@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package potoboothsession;
+package database_Mail;
 
 import java.io.BufferedReader;
 
@@ -18,21 +18,21 @@ import java.net.URL;
  */
 public class SendEmail {
 
-    public static String mail(String email) throws IOException {
+    public static String mail(String email, String code) throws IOException {
 
-        String urlLink = "http://mustafayucesan.nl/testJava.php?email=" + email + "";
+        String urlLink = "http://mustafayucesan.nl/testJava.php?email=" + email + "&code="+code+"";
         URL url = new URL(urlLink);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
 
-        BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-        StringBuffer sb = new StringBuffer();
-        String line;
-
-        while ((line = in.readLine()) != null) {
-            sb.append(line);
+        StringBuffer sb;
+        try (BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()))) {
+            sb = new StringBuffer();
+            String line;
+            while ((line = in.readLine()) != null) {
+                sb.append(line);
+            }
         }
-        in.close();
         System.out.println(sb.toString());
         return "Mail has been send";
     }
