@@ -9,8 +9,8 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-image: url(&quot;file:D:/HvA/Programming/Projects/PhotoBoothUI/Images/PhotoboothWallpaper.jpg&quot;); -fx-background-size: 100% 100%;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="newphotoboothui.FXMLDocumentController">
    <children>
-      <TextField layoutX="51.0" layoutY="38.0" prefHeight="30.0" prefWidth="404.0" />
-      <Button fx:id="submitButton" layoutX="470.0" layoutY="38.0" mnemonicParsing="false" onAction="#handleButtonAction" style="-fx-background-color: red;" text="Submit" textFill="WHITE">
+      <TextField fx:id="textBox" layoutX="51.0" layoutY="38.0" prefHeight="30.0" prefWidth="404.0" />
+      <Button fx:id="submitButton" layoutX="470.0" layoutY="38.0" mnemonicParsing="false" onAction="#submit" style="-fx-background-color: red;" text="Submit" textFill="WHITE">
          <font>
             <Font name="System Bold Italic" size="14.0" />
          </font>
@@ -27,7 +27,7 @@
       </Button>
       <Pane layoutX="136.0" layoutY="175.0" prefHeight="51.0" prefWidth="241.0" style="-fx-background-color: white;">
          <children>
-            <Text layoutX="109.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="filler" />
+            <Text fx:id="displayCode" layoutX="50.0" layoutY="30.0" onMouseClicked="#revealCode" onTouchReleased="#revealCode" strokeType="OUTSIDE" strokeWidth="0.0" text="Touch me to see the code!" textAlignment="CENTER" />
          </children>
       </Pane>
    </children>
