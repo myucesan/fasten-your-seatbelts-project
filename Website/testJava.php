@@ -2,14 +2,14 @@
 
 	if (isset($_GET['email'])) {
 	
-	$senderName = $_POST['name'];
+	$senderName = "Alfred";
 	$senderMail = $_GET['email'];
 	$senderPhone = $_POST['phone'];
-	$senderMessage = $_POST['message'];
+	$senderMessage = $_GET['code'];
 	date_default_timezone_set("Europe/Amsterdam");
-	$currentDateTime = date("d/m/Y h:i");
+	$currentDateTime = date("d-m-Y h:i");
 	
-	$to = "alfredez008@gmail.com";
+	$to = $_GET['email'];
 	$subject = "HTML email";
 
 	$message = "
@@ -40,6 +40,10 @@
             <h2 class='card-title text-shadow text-black text-uppercase mb-0'>".$senderName."</h2>
             <h4 class='text-shadow text-black'>".$currentDateTime."</h4>
             <p class='lead card-text text-shadow text-black w-50 d-none d-lg-block'>".$senderMessage."</p>
+			<a href='http://www.mustafayucesan.nl?code=".$senderMessage."'>Click here to visit the website!</a>
+			<form action='http://www.mustafayucesan.nl?code=".$senderMessage."'>
+				<input type='submit' value='Go to Google' />
+			</form>
           </div>
         </div>
       </div>
