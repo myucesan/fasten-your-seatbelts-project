@@ -1,4 +1,3 @@
-
 import com.pi4j.component.temperature.TemperatureSensor;
 import com.pi4j.component.temperature.impl.TmpDS18B20DeviceType;
 import com.pi4j.io.gpio.GpioController;
@@ -21,19 +20,24 @@ import java.util.List;
  * @author my96
  */
 public class SensorController {
+    // In lijst w1Devices alle temperatuur sensoren ophalen
 
     W1Master master = new W1Master();
     List<W1Device> w1Devices = master.getDevices(TmpDS18B20DeviceType.FAMILY_CODE);
 
     public double getTemperature() {
         double temperature = 0;
+        // Temperatuur checken voor elke temperatuur sensor; in dit geval één
         for (W1Device device : w1Devices) {
-            //returns the temperature as double rounded to one decimal place after the point
+            //in de temperatuur variabele wordt de waarde opgeslagen afgerond op 1 decimaal
             temperature = ((TemperatureSensor) device).getTemperature();
         }
-
+        // temperatuur wordt teruggegeven aan de method call
         return temperature;
     }
+/*
+
+Irrelevant voor product
 
     public String getTempSensorID() {
         String message = "";
@@ -48,12 +52,16 @@ public class SensorController {
         }
         return message;
     }
-
+*/
     public boolean isObstacle() {
+        // Pins worden geregistreerd
         final GpioController gpio = GpioFactory.getInstance();
+        // Waarde van een specifieke pin wordt gelezen
         final GpioPinDigitalOutput pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_05, "ObstacleDetector", PinState.HIGH);
         pin.setShutdownOptions(true, PinState.LOW);
         boolean result = false;
+        
+        // wanneer er een obstakel voor de sensor staat wordt result true anders false en die waarde wordt dan teruggegeven aan de method call
         for (int i = 0; i < 100; i++) {
             if (pin.isHigh()) {
                 result = true;
