@@ -5,23 +5,25 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-image: url(&quot;file:D:/HvA/Programming/Projects/PhotoBoothUI/Images/PhotoboothWallpaper.jpg&quot;); -fx-background-size: 100% 100%;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="newphotoboothui.FXMLDocumentController">
+<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-image: url(&quot;file:D:/HvA/Programming/Projects/PhotoBoothUI/Images/PhotoboothWallpaper.jpg&quot;); -fx-background-size: 100% 100%;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="newphotoboothui.FXMLShowcaseController">
    <children>
-      <Button fx:id="verderButton" layoutX="466.0" layoutY="274.0" mnemonicParsing="false" onAction="#handleButtonAction" style="-fx-background-color: red; -fx-min-height: 100px; -fx-min-width: 100px;" text="Verder" textFill="WHITE">
+      <Button fx:id="verderButton" layoutX="466.0" layoutY="274.0" mnemonicParsing="false" onAction="#verder" style="-fx-background-color: red; -fx-min-height: 100px; -fx-min-width: 100px;" text="Verder" textFill="WHITE">
          <font>
             <Font name="System Bold Italic" size="24.0" />
          </font>
       </Button>
-      <Button fx:id="opnieuwButton" layoutX="466.0" layoutY="150.0" mnemonicParsing="false" onAction="#handleButtonAction" style="-fx-background-color: red; -fx-min-height: 100px; -fx-min-width: 100px;" text="Nog een foto" textFill="WHITE">
+      <Button fx:id="opnieuwButton" layoutX="466.0" layoutY="150.0" mnemonicParsing="false" onAction="#nogEenFoto" style="-fx-background-color: red; -fx-min-height: 100px; -fx-min-width: 100px;" text="Nog een foto" textFill="WHITE">
          <font>
             <Font name="System Bold Italic" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="deleteButton" layoutX="466.0" layoutY="31.0" mnemonicParsing="false" onAction="#handleButtonAction" style="-fx-max-height: 100px; -fx-max-width: 100px; -fx-background-color: red; -fx-min-height: 100px; -fx-min-width: 100px;" text="Delete" textFill="WHITE">
+      <Button fx:id="deleteButton" layoutX="466.0" layoutY="31.0" mnemonicParsing="false" onAction="#deleteFoto" style="-fx-max-height: 100px; -fx-max-width: 100px; -fx-background-color: red; -fx-min-height: 100px; -fx-min-width: 100px;" text="Delete" textFill="WHITE">
          <font>
             <Font name="System Bold Italic" size="18.0" />
          </font>
       </Button>
-      <ImageView fitHeight="338.0" fitWidth="377.0" layoutX="50.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="showCase" fitHeight="289.0" fitWidth="341.0" layoutX="60.0" layoutY="73.0" pickOnBounds="true" preserveRatio="true" />
+      <Button layoutX="22.0" layoutY="192.0" mnemonicParsing="false" onAction="#scrollBack" text="terug" />
+      <Button layoutX="408.0" layoutY="192.0" mnemonicParsing="false" onAction="#scrollForward" text="vooruit" />
    </children>
 </AnchorPane>
