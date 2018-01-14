@@ -21,183 +21,197 @@ import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.transform.Rotate;
 import javax.imageio.ImageIO;
-import database_Mail.PotoboothSession;
 import java.awt.image.BufferedImage;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.stage.Stage;
-import static newphotoboothui.FXMLDocumentController.stage;
-
+import gifwriter.GifSequenceWriter;
 
 /**
  *
  * @author Joshua Offermans
  */
-public class FXMLFotoController implements Initializable{
+public class FXMLFotoController implements Initializable {
+    
+    
+
     @FXML
     AnchorPane rootPane;
-    
+
     @FXML
     Button fotoButton;
-    
-            
+
     @FXML
     ImageView imgWebCamCapturedImage;
     private Webcam selWebCam = null;
     private ObjectProperty<Image> imageProperty = new SimpleObjectProperty<Image>();
     private boolean cameraAan = true;
     private BufferedImage grabbedImage;
-    
+
     int fotonummer = Settings.getFotnummer();
     String session = Settings.getSessionId();
-    
+
     int cameraposition = 50;
-    
-    
-    
-    public void FotoButton(){
+
+    public void FotoButton() {
         closeCamera();
         viewFades.FadeOut(rootPane, "FXMLShowcase.fxml");
-        
-        
+
     }
     
-     protected void initializeWebCam() {
+    
+    
 
-		Task<Void> webCamIntilizer = new Task<Void>() {
+    protected void initializeWebCam() {
 
-			@Override
-			protected Void call() throws Exception {
+        Task<Void> webCamIntilizer = new Task<Void>() {
 
-				if (selWebCam == null) {
-					selWebCam = Webcam.getDefault();
-                                        selWebCam.setViewSize(WebcamResolution.QVGA.getSize());
-					selWebCam.open();
-				} else {
-					closeCamera();
-					selWebCam = Webcam.getDefault();
-                                        selWebCam.setViewSize(WebcamResolution.QVGA.getSize());
-					selWebCam.open();
-				}
-				startWebCamStream();
-				return null;
-			}
+            @Override
+            protected Void call() throws Exception {
 
-		};
-                imgWebCamCapturedImage.setTranslateZ(imgWebCamCapturedImage.getBoundsInLocal().getWidth() / 2.0);
-                imgWebCamCapturedImage.setRotationAxis(Rotate.Y_AXIS);
-                imgWebCamCapturedImage.setRotate(180);                
-		new Thread(webCamIntilizer).start();
-                
-	}
+                if (selWebCam == null) {
+                    selWebCam = Webcam.getDefault();
+                    selWebCam.setViewSize(WebcamResolution.QVGA.getSize());
+                    selWebCam.open();
+                } else {
+                    closeCamera();
+                    selWebCam = Webcam.getDefault();
+                    selWebCam.setViewSize(WebcamResolution.QVGA.getSize());
+                    selWebCam.open();
+                }
+                startWebCamStream();
+                return null;
+            }
 
-	protected void startWebCamStream() {
-		Task<Void> task = new Task<Void>() {
-			@Override
-			protected Void call() throws Exception {
-                                fotoButton.setVisible(true);
-				while (cameraAan) {
-					try {
-						if ((grabbedImage = selWebCam.getImage()) != null) {
+        };      
+        new Thread(webCamIntilizer).start();
 
-							Platform.runLater(new Runnable() {
+    }
 
-								@Override
-								public void run() {
-									final Image mainiamge = SwingFXUtils
-										.toFXImage(grabbedImage, null);
-									imageProperty.set(mainiamge);
-								}
-							});
+    protected void startWebCamStream() {
+        Task<Void> task = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                fotoButton.setVisible(true);
+                while (cameraAan) {
+                    try {
+                        if ((grabbedImage = selWebCam.getImage()) != null) {
 
-							grabbedImage.flush();
+                            Platform.runLater(new Runnable() {
 
-						}
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
+                                @Override
+                                public void run() {
+                                    final Image mainiamge = SwingFXUtils
+                                            .toFXImage(grabbedImage, null);
+                                    imageProperty.set(mainiamge);
+                                }
+                            });
 
-				return null;
-			}
+                            grabbedImage.flush();
 
-		};
-		Thread th = new Thread(task);
-		th.setDaemon(true);
-		th.start(); 
-		imgWebCamCapturedImage.imageProperty().bind(imageProperty);
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
 
-	}
-        
-        public void makePicutre(){
-            try{
-                ImageIO.write(grabbedImage, "PNG", new File(session+'_'+fotonummer+".png"));
-            }  
-            catch(Exception ex){
+                return null;
+            }
+
+        };
+        Thread th = new Thread(task);
+        th.setDaemon(true);
+        th.start();
+        imgWebCamCapturedImage.imageProperty().bind(imageProperty);
+
+    }
+
+    public void makePicture() {
+        try {
+            ImageIO.write(grabbedImage, "PNG", new File(session + '_' + fotonummer + ".png"));
+        } catch (Exception ex) {
+            System.err.println("Fout bij het maken van de foto: " + ex);
+        }
+        fotonummer++;
+        Settings.setFotonummer(fotonummer);
+        Settings.setBurst(false);
+        closeCamera();
+        viewFades.FadeOut(rootPane, "FXMLShowcase.fxml");
+    }
+    
+    
+    public void makeBurst() {
+        String[] args = new String[20];
+        String fotonaam;
+        fotonummer = Settings.getFotnummer();
+        for(int i = 0 ; i < 20; i++){
+            try {
+                fotonaam = session + '_' +i+ '_' + fotonummer + ".png";
+                ImageIO.write(grabbedImage, "PNG", new File(fotonaam));
+                args[i] = fotonaam;
+            } catch (Exception ex) {
                 System.err.println("Fout bij het maken van de foto: " + ex);
             }
-            fotonummer++;
-            Settings.setFotonummer(fotonummer);
-            closeCamera();
-            viewFades.FadeOut(rootPane, "FXMLShowcase.fxml");
-        }    
-        
+        }
+        try {
+            GifSequenceWriter.main(args,fotonummer);
+        } catch (Exception ex) {
+            Logger.getLogger(FXMLFotoController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        fotonummer++;
+        Settings.setFotonummer(fotonummer);
+        Settings.setBurst(true);
+        closeCamera();
+        viewFades.FadeOut(rootPane, "FXMLShowcase.fxml");
+    }
+    
+    
+    
+    
 
-	private void closeCamera() {
-		if (selWebCam != null) {
-			selWebCam.close();
-		}
-	}
-        
-        
-        public ServoDriver initServo() throws IOException{
-            
-            final GpioController gpio = GpioFactory.getInstance();
-            ServoProvider servoProvider = new RPIServoBlasterProvider();
-            ServoDriver servo= servoProvider.getServoDriver(servoProvider.getDefinedServoPins().get(2));
-            return servo;
+    private void closeCamera() {
+        if (selWebCam != null) {
+            selWebCam.close();
         }
-    
-        
-        public void cameraTurnRight(){ 
-            try{
-                ServoDriver servo = initServo();
-                  for (int i = 20; i > 0; i--) {
-                    cameraposition--;
-                    servo.setServoPulseWidth(cameraposition); // Set raw value for this servo driver - 50 to 195
-                    Thread.sleep(10);
-                } 
+    }
+
+    public ServoDriver initServo() throws IOException {
+
+        final GpioController gpio = GpioFactory.getInstance();
+        ServoProvider servoProvider = new RPIServoBlasterProvider();
+        ServoDriver servo = servoProvider.getServoDriver(servoProvider.getDefinedServoPins().get(2));
+        return servo;
+    }
+
+    public void cameraTurnRight() {
+        try {
+            ServoDriver servo = initServo();
+            for (int i = 20; i > 0; i--) {
+                cameraposition--;
+                servo.setServoPulseWidth(cameraposition); // Set raw value for this servo driver - 50 to 195
+                Thread.sleep(10);
             }
-            catch(Exception ex){
-                System.err.println("Fout bij sleep: " + ex);
-            }
+        } catch (Exception ex) {
+            System.err.println("Fout bij sleep: " + ex);
         }
-        
-  
-        
-        public void cameraTurnLeft(){
-            try{
-                ServoDriver servo = initServo();
-                  for (int i = 20; i > 0; i--) {
-                    cameraposition++;
-                    servo.setServoPulseWidth(cameraposition); // Set raw value for this servo driver - 50 to 195
-                    Thread.sleep(10);
-                } 
+    }
+
+    public void cameraTurnLeft() {
+        try {
+            ServoDriver servo = initServo();
+            for (int i = 20; i > 0; i--) {
+                cameraposition++;
+                servo.setServoPulseWidth(cameraposition); // Set raw value for this servo driver - 50 to 195
+                Thread.sleep(10);
             }
-            catch(Exception ex){
-                System.err.println("Fout bij sleep: " + ex);
-            }
+        } catch (Exception ex) {
+            System.err.println("Fout bij sleep: " + ex);
         }
-    
-    
+    }
+
     @Override
-    public void initialize(URL location, ResourceBundle resources) { 
+    public void initialize(URL location, ResourceBundle resources) {
         fotoButton.setVisible(false);
         viewFades.FadeIn(rootPane);
         Image loading = new Image(FXMLFotoController.class.getResourceAsStream("a.jpg"));
@@ -205,7 +219,4 @@ public class FXMLFotoController implements Initializable{
         initializeWebCam();
     }
 
-
-    
-    
 }

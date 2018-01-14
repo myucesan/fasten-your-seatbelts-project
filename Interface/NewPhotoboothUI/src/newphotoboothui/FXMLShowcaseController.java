@@ -7,7 +7,11 @@ package newphotoboothui;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -21,6 +25,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javax.imageio.ImageIO;
 import javax.print.attribute.standard.PrinterInfo;
+import org.apache.commons.lang3.ArrayUtils;
 
 /**
  *
@@ -33,21 +38,30 @@ public class FXMLShowcaseController implements Initializable{
     @FXML
     ImageView showCase;
     
-    private String[] fotos = new String[20];
+    @FXML
+    ImageView scrollForward;
+    
+    
+    @FXML
+    ImageView scrollBack;
+    
+    private String[] fotos = Settings.getArray();
+    Boolean burst;
     int aantalFotos = Settings.getFotnummer();
     int fotonummer = aantalFotos - 1;
     String sessionid = Settings.getSessionId();
 
     
     public void setPicture(int pictureNumber){  
-        BufferedImage bufferedImage;
+        File file = new File(fotos[pictureNumber]);
         try {
-            bufferedImage =  ImageIO.read(new File(fotos[pictureNumber]));
-            Image image = SwingFXUtils.toFXImage(bufferedImage, null);
-            this.showCase.setImage(image);
-        } catch (IOException ex) {
+            String localUrl = file.toURI().toURL().toString();
+            Image localImage = new Image(localUrl, true);
+            showCase.setImage(localImage);
+        } catch (MalformedURLException ex) {
             Logger.getLogger(FXMLShowcaseController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }
     
     
@@ -56,65 +70,85 @@ public class FXMLShowcaseController implements Initializable{
         
     }
     
-    
-    
-    
     public void nogEenFoto(){
-        viewFades.FadeOut(rootPane, "FXMLFoto.fxml");
+        viewFades.FadeOut(rootPane, "FXMLMode.fxml");
          
 }
     
     public void scrollBack(){
-        if(fotos[fotonummer] == null){
-            while(fotos[fotonummer] == null){
-                fotonummer--;
-            }
+        fotonummer--;
+        if (fotonummer == 0){
+            scrollBack.setVisible(false);
         }
-        else{
-            fotonummer--;
+        if (fotonummer < (aantalFotos - 1)){
+            scrollForward.setVisible(true);
         }
-                System.out.println("Foto: " + fotonummer);
-                System.out.println(fotos[fotonummer]);
         setPicture(fotonummer);
-        
     }
     
     public void scrollForward(){
-        if(fotos[fotonummer] == null){
-            while(fotos[fotonummer] == null){
-                fotonummer++;
+        fotonummer++;
+        if (fotonummer == (aantalFotos - 1)){
+            scrollForward.setVisible(false);
+        }
+        else {
+            scrollForward.setVisible(true);
+        }
+        if(fotonummer> 0 ){
+            scrollBack.setVisible(true);
+        }
+        setPicture(fotonummer);
+    }
+    
+    public void deleteFoto(){
+        
+        /*
+        int j = 0;
+        fotos[fotonummer] = "deleted";
+        String[] temp = new String[15];
+        for(int k = 0; k < aantalFotos; k++){
+            temp[k] = fotos[k];
+        }
+        for(int i = 0; fotos[i] != null; i++){
+            if(temp[i] == "deleted"){
+                j--;
             }
-        }
-        else{
-            fotonummer++;
-        }
-        System.out.println("Foto: " + fotonummer);
-        System.out.println(fotos[fotonummer]);
+            else {
+                fotos[j] = temp[i];
+            }
+            j++;
+        }*/
+        fotos = ArrayUtils.remove(fotos,fotonummer);
+        aantalFotos--;
         setPicture(fotonummer);
         
     }
     
-    public void deleteFoto(){
-        fotos[fotonummer] = null;
-        scrollBack();
-        
-    }
     
     
-    
-    public void setArray(){
-        for(int i = 0;i < aantalFotos ; i++ ){
-            fotos[i] = sessionid+"_"+i+".png";
+    public void addArray(boolean burst){
+        int i = aantalFotos-1;
+        String fotonaam;
+        if(!burst){
+                 fotonaam= sessionid+"_"+i+".png";
         }
+        else{
+                fotonaam = sessionid+"_"+"B"+"_"+i+".gif";
+            }
+        Settings.setArray(fotonaam, i);
     }
     
     
     @Override
     public void initialize(URL location, ResourceBundle resources) { 
-        System.out.println(aantalFotos);
         viewFades.FadeIn(rootPane);
-         setArray();
-         setPicture(fotonummer);
+        burst = Settings.getBurst();
+        addArray(burst);
+        scrollForward.setVisible(false);
+        if (fotonummer == 0 ){
+            scrollBack.setVisible(false);
+        }
+        setPicture(fotonummer);
     }
     
 }

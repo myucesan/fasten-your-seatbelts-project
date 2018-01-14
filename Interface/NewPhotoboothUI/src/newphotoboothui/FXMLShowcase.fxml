@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-image: url(&quot;file:D:/HvA/Programming/Projects/PhotoBoothUI/Images/PhotoboothWallpaper.jpg&quot;); -fx-background-size: 100% 100%;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="newphotoboothui.FXMLShowcaseController">
+<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-image: url(&quot;https://i.imgur.com/Nwyhazk.jpg&quot;); -fx-background-size: 100% 100%;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="newphotoboothui.FXMLShowcaseController">
    <children>
+      <ImageView fx:id="scrollBack" fitHeight="84.0" fitWidth="105.0" layoutX="-9.0" layoutY="155.0" onDragEntered="#scrollForward" onMouseDragReleased="#scrollBack" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/arrow-left.png" />
+         </image>
+      </ImageView>
       <Button fx:id="verderButton" layoutX="466.0" layoutY="274.0" mnemonicParsing="false" onAction="#verder" style="-fx-background-color: red; -fx-min-height: 100px; -fx-min-width: 100px;" text="Verder" textFill="WHITE">
          <font>
             <Font name="System Bold Italic" size="24.0" />
@@ -23,7 +29,12 @@
          </font>
       </Button>
       <ImageView fx:id="showCase" fitHeight="289.0" fitWidth="341.0" layoutX="60.0" layoutY="73.0" pickOnBounds="true" preserveRatio="true" />
-      <Button layoutX="22.0" layoutY="192.0" mnemonicParsing="false" onAction="#scrollBack" text="terug" />
-      <Button layoutX="408.0" layoutY="192.0" mnemonicParsing="false" onAction="#scrollForward" text="vooruit" />
+      <ImageView fx:id="scrollForward" fitHeight="84.0" fitWidth="105.0" layoutX="381.0" layoutY="150.0" onMouseDragReleased="#scrollForward" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/arrow-right.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="389.0" layoutY="158.0" mnemonicParsing="false" onAction="#scrollForward" prefHeight="84.0" prefWidth="69.0" style="-fx-background-color: transparant;" />
+      <Button contentDisplay="TOP" layoutX="3.0" layoutY="140.0" mnemonicParsing="false" onAction="#scrollBack" prefHeight="115.0" prefWidth="69.0" style="-fx-background-color: transparant;" textFill="WHITE" />
    </children>
 </AnchorPane>

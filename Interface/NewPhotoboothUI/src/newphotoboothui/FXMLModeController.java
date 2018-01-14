@@ -24,6 +24,11 @@ public class FXMLModeController implements Initializable{
         
     }
     
+    public void Burst(){
+        viewFades.FadeOut(rootPane, "FXMLBurstFoto.fxml");
+        
+    }
+    
     @Override
     public void initialize(URL location, ResourceBundle resources) { 
          viewFades.FadeIn(rootPane);

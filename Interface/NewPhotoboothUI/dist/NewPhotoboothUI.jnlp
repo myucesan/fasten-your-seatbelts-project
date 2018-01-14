@@ -8,7 +8,29 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="NewPhotoboothUI.jar" size="7148" download="eager" />
+    <jar href="NewPhotoboothUI.jar" size="457652" download="eager" />
+    <jar href="lib\bridj-0.6.2.jar" size="878674" download="eager" />
+    <jar href="lib\commons-collections4-4.1.jar" size="751238" download="eager" />
+    <jar href="lib\commons-lang3-3.7-sources.jar" size="550341" download="eager" />
+    <jar href="lib\commons-lang3-3.7.jar" size="499634" download="eager" />
+    <jar href="lib\junit.jar" size="245039" download="eager" />
+    <jar href="lib\pi4j-core-javadoc.jar" size="1255902" download="eager" />
+    <jar href="lib\pi4j-core-sources.jar" size="578816" download="eager" />
+    <jar href="lib\pi4j-core.jar" size="537230" download="eager" />
+    <jar href="lib\pi4j-device-javadoc.jar" size="1354395" download="eager" />
+    <jar href="lib\pi4j-device-sources.jar" size="261629" download="eager" />
+    <jar href="lib\pi4j-device.jar" size="228020" download="eager" />
+    <jar href="lib\pi4j-example-javadoc.jar" size="558797" download="eager" />
+    <jar href="lib\pi4j-example-sources.jar" size="258691" download="eager" />
+    <jar href="lib\pi4j-example.jar" size="260535" download="eager" />
+    <jar href="lib\pi4j-gpio-extension-javadoc.jar" size="319355" download="eager" />
+    <jar href="lib\pi4j-gpio-extension-sources.jar" size="95643" download="eager" />
+    <jar href="lib\pi4j-gpio-extension.jar" size="96078" download="eager" />
+    <jar href="lib\pi4j-service-javadoc.jar" size="86850" download="eager" />
+    <jar href="lib\pi4j-service-sources.jar" size="18044" download="eager" />
+    <jar href="lib\pi4j-service.jar" size="19063" download="eager" />
+    <jar href="lib\slf4j-api-1.7.2.jar" size="26083" download="eager" />
+    <jar href="lib\webcam-capture-0.3.10.jar" size="409084" download="eager" />
   </resources>
   <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="NewPhotoboothUI" >
     <param name="requiredFXVersion" value="8.0+"/>
