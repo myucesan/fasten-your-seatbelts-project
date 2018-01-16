@@ -10,15 +10,47 @@ Als de proces is afgerond wordt deze pagina doormiddel van een script automatisc
 		echo $_GET['name'] . "<br>";
 		echo $_GET['id'];
 		//Get the file
+		
 		$url = $_GET['name'];
 		$fileName = $_GET['id'];
 		$content = file_get_contents($_GET['name']);
-		//Store in the filesystem.
-		$fp = fopen("images/".$fileName.".jpg", "w");
-		fwrite($fp, $content);
-		fclose($fp);
-		$File = $fileName . ".jpg";
+		
 
-		echo "<script>window.close();</script>";
+		echo getcwd();
+		$path = getcwd() . "/images/".$fileName."";
+
+		
+		$file = $path;
+		if (!unlink($file))
+		  {
+		  echo ("<br>Error deleting $file");
+		  }
+		else
+		  {
+		  echo ("<br>Deleted $file");
+		  }
+		
+		if(!file_exists($path)){
+			
+			$fp = fopen($path, "w");
+			
+			if($fp){
+				echo "<br>file pointer is ok";
+				
+				$data = $content;
+				
+				fwrite($fp, $data);
+				
+				fclose($fp);
+				
+				echo "<br> the file has been written.";
+			}
+			
+		}
+		
+		
+		echo "<img id='editableimage' src='../gallery/images/".$fileName."' />";
+		
+		//echo "<script>window.close();</script>";
 
 		?>
