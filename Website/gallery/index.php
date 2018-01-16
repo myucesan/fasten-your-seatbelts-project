@@ -7,10 +7,11 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 //$code = "CTcT7W";
-$code = (isset($_POST['code']) ? $_POST['code'] : "undefined");
+//$code = (isset($_POST['code']) ? $_POST['code'] | $_GET['code'] : "undefined");
+$code = $_POST['code'];
 $sql = "SELECT * FROM sessie INNER JOIN foto ON sessie.id=foto.sessieID WHERE sessie.code = '$code'";
 $result = mysqli_query($conn, $sql);
-if($_POST['code'] == "") {
+if($_POST['code'] == "" && $_GET['code'] == "") {
   echo "No code was submitted.";
 }
 
@@ -63,10 +64,6 @@ echo "</div>";
 			downloads.href = newURL;
 			downloads.download = newURL;
 
-        /*
-            we posten de url van de api, dat de foto bevat plus het id naar een download.php script.
-            daar wordt de bewerkte foto opgeslagen in de image map
-        */
 		window.open("download.php?name=" + newURL + "&id=" + imageID,'_blank' );
             var img = document.getElementById(imageID);
             img.src = newURL;
@@ -130,29 +127,35 @@ echo "</div>";
 			if (mysqli_num_rows($result) > 0) {
 				// output data of each row
 			echo "<div class='gallery cf ' data-pswp-uid='1'>";
-			
-			/*
-			    In deze while loop wordt elke foto dat bij de code hoort weergeven
-			*/
 				while($row = mysqli_fetch_assoc($result)) {
 					// echo "id: " . $row["id"]. " - path: " . $row["path"]. " " . $row["locatie"]. "<br>";
 					//echo "<a href='#'>";
 					//echo "<img src='$row[path]' />";
 					//echo "</a>";
+					$fileName = "'" . str_replace("images/", "", "".$row['path']."") . "'";
+					$fileNameID = str_replace("images/", "", "".$row['path']."");
 					$editableImage = "'editableimage".$row['id']."'";
 					$path = " '".$row['path']."'";
-					$downloadLink = "images/editableimage" . $row['id'].".jpg";
+					$downloadLink = "images/" . $fileNameID."";
+					
 
 
 				// START NEW gallery
 
 				  echo "<div>";
 					// echo("<a href=\"#\" onclick=\"return launchEditor('.$editableImage.','.$path.');\"><img id='editableimage$row[id]' src='$row[path]' width='200'/></a>");
-					echo "<img id='editableimage$row[id]' src='$row[path]' />";
-					echo '<a href="#" onclick="return launchEditor('.$editableImage.','.$path.');" class="button twitter">Edit!</a>';
+					echo "<img id='".$fileNameID."' src='../$row[path]' />";					
 					// echo '<a id="editableimage'.$row["id"].'" class="button twitter" href="'.$row["path"].'" download>Download</a>';
-					echo '<a class="button twitter editableimage'.$row["id"].'" href="../'.$row['path'].'" download>Download Original Foto</a>';
-						echo '<a class="button twitter editableimage'.$row["id"].'" href="'.$downloadLink.'" download>Download Edited Foto</a>';
+					echo '<a class="button twitter editableimage'.$row["id"].'" href="../'.$row['path'].'" download>Download Original</a>';					
+						
+						$gif = strpos($fileNameID,".gif");
+
+						if(!$gif){
+							echo '<a href="#" onclick="return launchEditor('.$fileName.','.$path.');" class="button twitter">Edit!</a>';
+							echo '<a class="button twitter editableimage'.$row["id"].'" href="'.$downloadLink.'" download>Download Edited</a>';
+						}
+						
+						//echo str_replace("images/", "", "".$row['path']."");
 				  echo "</div>";
 
 
