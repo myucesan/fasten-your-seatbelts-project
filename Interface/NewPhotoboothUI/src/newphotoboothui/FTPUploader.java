@@ -14,8 +14,8 @@ import org.apache.commons.net.ftp.FTPReply;
 public class FTPUploader {
 
     FTPClient ftp = null;
-    static boolean delete = false;
-    static String Path = "C:\\Users\\Alfred Espinosa\\Desktop\\ftytest.txt";
+    private static final String PATH = "F:\\HvA\\Homework\\Programming\\NewPhotoboothUI\\";
+    private static final String IMAGE_DIR = "/var/www/html/images/";
 
     public FTPUploader(String host, String user, String pwd) throws Exception {
         ftp = new FTPClient();
@@ -36,6 +36,10 @@ public class FTPUploader {
             throws Exception {
         try (InputStream input = new FileInputStream(new File(localFileFullName))) {
             this.ftp.storeFile(hostDir + fileName, input);
+            
+            this.ftp.sendCommand("SITE chmod 755 "+ IMAGE_DIR + fileName + "");
+
+
             //delete = true;
         }
     }
@@ -51,25 +55,29 @@ public class FTPUploader {
         }
     }
 
-    public static void Upload(String Path2) throws Exception {
+    public static void Upload(String fileName) throws Exception {
         System.out.println("Start");
         FTPUploader ftpUploader = new FTPUploader("185.177.59.153", "fys", "fys-resort5");
         //FTP server path is relative. So if FTP account HOME directory is "/home/pankaj/public_html/" and you need to upload 
         // files to "/home/pankaj/public_html/wp-content/uploads/image2/", you should pass directory parameter as "/wp-content/uploads/image2/"
-        ftpUploader.uploadFile(Path2, "Thomas.jpg", "/var/www/");
+        System.out.println(fileName);
+        ftpUploader.uploadFile(PATH + fileName, fileName, IMAGE_DIR);
         //deleteFile();
         ftpUploader.disconnect();
+        
+        
+        
         System.out.println("Done");
     }
 
-    public static void deleteFile() {
-        if (delete) {
+    public static void deleteFile(String fileName) {
+
             try {
 
-                File file = new File(Path);
+                File file = new File(PATH + fileName);
 
                 if (file.delete()) {
-                    System.out.println(file.getName() + " is deleted!");
+                    System.out.println(file.getName() + " is deleted from the pi dir!");
                 } else {
                     System.out.println("Delete operation is failed.");
                 }
@@ -79,7 +87,7 @@ public class FTPUploader {
                 e.printStackTrace();
 
             }
-        }
+        
     }
 
 }
