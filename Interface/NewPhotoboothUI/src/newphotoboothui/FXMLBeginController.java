@@ -5,9 +5,12 @@
  */
 package newphotoboothui;
 
+
 import com.github.sarxos.webcam.Webcam;
+import database_Mail.SqlConnection;
 import java.awt.image.BufferedImage;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -23,6 +26,8 @@ import javafx.scene.layout.AnchorPane;
  */
 public class FXMLBeginController  implements Initializable{
     
+    SqlConnection connection = new SqlConnection();
+    
     @FXML
     AnchorPane rootPane;
     
@@ -36,8 +41,14 @@ public class FXMLBeginController  implements Initializable{
         
     
     public void beginButton() {
-        viewFades.FadeOut(rootPane, "FXMLMode.fxml");
         
+        viewFades.FadeOut(rootPane, "FXMLMode.fxml");
+        try {
+            connection.Open();
+            connection.Remove();
+        } catch (ClassNotFoundException | SQLException c) {
+            System.out.println(c);
+        }
     }
     
     
