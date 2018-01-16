@@ -21,15 +21,18 @@
 	$sql = "SELECT * FROM sessie";
 	$result= mysqli_query($conn,$sql); 
 	$sessies = mysqli_num_rows($result);
+	
 	$sql = "SELECT SUM(aantal) FROM sessie";
 	$result= mysqli_query($conn,$sql); 
 	$row = mysqli_fetch_row($result);
 	$fotos = (int)$row[0];
 	$gemfotos = $fotos/$sessies;
+	
 	$sql = "SELECT SUM(temperatuur) FROM sessie";
 	$result = mysqli_query($conn, $sql);
 	$row= mysqli_fetch_row($result);
 	$temp = (int)$row[0] / $sessies;
+	
 	$sql = "select AVG(cast(tijd as time)) from sessie";
 	$result = mysqli_query($conn, $sql);
 	$row = mysqli_fetch_row($result);
@@ -88,7 +91,7 @@
 			  <tr>
 			    <td><?php echo $sessies;?></td>
 			    <td><?php echo $fotos;?></td>
-			    <td><?php echo $gemfotos;?></td>
+			    <td><?php echo round ($gemfotos);?></td>
 			    <td><?php echo (int)$temp;?></td>
 			    <td><?php echo $tijd1;?>:<?php echo $tijd2;?></td>
 			  </tr>
