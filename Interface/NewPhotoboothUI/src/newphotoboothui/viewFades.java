@@ -54,12 +54,7 @@ public class viewFades {
    }
     
     
-    
-//      public static FXMLLoader returnLoader(){ 
-//          loadMode load = new loadMode();
-//          return load.loader;
-//       }
-// 
+   
     
     
 

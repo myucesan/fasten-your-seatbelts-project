@@ -48,23 +48,14 @@ public class FXMLFotoController implements Initializable {
     private ObjectProperty<Image> imageProperty = new SimpleObjectProperty<Image>();
     private boolean cameraAan = true;
     private BufferedImage grabbedImage;
-
+    Thread th;
     int fotonummer = Settings.getFotnummer();
     String session = Settings.getSessionId();
 
     int cameraposition = 50;
 
-    public void FotoButton() {
-        closeCamera();
-        viewFades.FadeOut(rootPane, "FXMLShowcase.fxml");
-
-    }
     
-    
-    
-
     protected void initializeWebCam() {
-
         Task<Void> webCamIntilizer = new Task<Void>() {
 
             @Override
@@ -120,7 +111,7 @@ public class FXMLFotoController implements Initializable {
             }
 
         };
-        Thread th = new Thread(task);
+        th = new Thread(task);
         th.setDaemon(true);
         th.start();
         imgWebCamCapturedImage.imageProperty().bind(imageProperty);
@@ -128,14 +119,23 @@ public class FXMLFotoController implements Initializable {
     }
 
     public void makePicture() {
+        int fotoid = Settings.getFotoid();
         try {
-            ImageIO.write(grabbedImage, "PNG", new File(session + '_' + fotonummer + ".png"));
+            ImageIO.write(grabbedImage, "PNG", new File(session + '_' + fotoid + ".png"));
         } catch (Exception ex) {
             System.err.println("Fout bij het maken van de foto: " + ex);
         }
+        fotoid++;
         fotonummer++;
+        Settings.setFotoid(fotoid);
         Settings.setFotonummer(fotonummer);
         Settings.setBurst(false);
+        cameraAan = false;
+        try {
+            th.join();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(FXMLFotoController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         closeCamera();
         viewFades.FadeOut(rootPane, "FXMLShowcase.fxml");
     }
@@ -144,10 +144,11 @@ public class FXMLFotoController implements Initializable {
     public void makeBurst() {
         String[] args = new String[20];
         String fotonaam;
+        int fotoid = Settings.getFotoid();
         fotonummer = Settings.getFotnummer();
         for(int i = 0 ; i < 20; i++){
             try {
-                fotonaam = session + '_' +i+ '_' + fotonummer + ".png";
+                fotonaam = session + '_' +i+ '_' + fotoid + ".png";
                 ImageIO.write(grabbedImage, "PNG", new File(fotonaam));
                 args[i] = fotonaam;
             } catch (Exception ex) {
@@ -155,13 +156,21 @@ public class FXMLFotoController implements Initializable {
             }
         }
         try {
-            GifSequenceWriter.main(args,fotonummer);
+            GifSequenceWriter.main(args,fotoid);
         } catch (Exception ex) {
             Logger.getLogger(FXMLFotoController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        fotoid++;
         fotonummer++;
+        Settings.setFotoid(fotoid);
         Settings.setFotonummer(fotonummer);
         Settings.setBurst(true);
+                cameraAan = false;
+        try {
+            th.join();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(FXMLFotoController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         closeCamera();
         viewFades.FadeOut(rootPane, "FXMLShowcase.fxml");
     }
@@ -212,11 +221,11 @@ public class FXMLFotoController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        initializeWebCam();
         fotoButton.setVisible(false);
         viewFades.FadeIn(rootPane);
-        Image loading = new Image(FXMLFotoController.class.getResourceAsStream("a.jpg"));
+        Image loading = new Image(FXMLFotoController.class.getResourceAsStream("load.gif"));
         imgWebCamCapturedImage.setImage(loading);
-        initializeWebCam();
     }
 
 }

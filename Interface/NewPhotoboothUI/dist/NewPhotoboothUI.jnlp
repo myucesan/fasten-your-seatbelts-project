@@ -8,10 +8,8 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="NewPhotoboothUI.jar" size="457652" download="eager" />
+    <jar href="NewPhotoboothUI.jar" size="433513" download="eager" />
     <jar href="lib\bridj-0.6.2.jar" size="878674" download="eager" />
-    <jar href="lib\commons-collections4-4.1.jar" size="751238" download="eager" />
-    <jar href="lib\commons-lang3-3.7-sources.jar" size="550341" download="eager" />
     <jar href="lib\commons-lang3-3.7.jar" size="499634" download="eager" />
     <jar href="lib\junit.jar" size="245039" download="eager" />
     <jar href="lib\pi4j-core-javadoc.jar" size="1255902" download="eager" />

@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-image: url(&quot;https://i.imgur.com/Nwyhazk.jpg&quot;); -fx-background-size: 100% 100%;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="newphotoboothui.FXMLShowcaseController">
+<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-image: url(&quot;https://i.imgur.com/Nwyhazk.jpg&quot;); -fx-background-size: 100% 100%;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="newphotoboothui.FXMLShowcaseController">
    <children>
       <ImageView fx:id="scrollBack" fitHeight="84.0" fitWidth="105.0" layoutX="-9.0" layoutY="155.0" onDragEntered="#scrollForward" onMouseDragReleased="#scrollBack" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -29,7 +29,7 @@
          </font>
       </Button>
       <ImageView fx:id="showCase" fitHeight="289.0" fitWidth="341.0" layoutX="60.0" layoutY="73.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="scrollForward" fitHeight="84.0" fitWidth="105.0" layoutX="381.0" layoutY="150.0" onMouseDragReleased="#scrollForward" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="scrollForward" fitHeight="84.0" fitWidth="105.0" layoutX="381.0" layoutY="155.0" onMouseDragReleased="#scrollForward" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/arrow-right.png" />
          </image>
