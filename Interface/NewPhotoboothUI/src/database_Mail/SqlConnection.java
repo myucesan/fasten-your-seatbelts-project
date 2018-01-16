@@ -50,14 +50,14 @@ public class SqlConnection {
         System.out.println("Connection Closed");
     }
 
-    public void Insert(String generatedCode, String curDate) throws SQLException{
+    public void Insert(String generatedCode, String curDate, String[] listFotos, int aantalFotos) throws SQLException{
 
         //STEP 4: Execute a query
         System.out.println("Inserting records into the table...");
         stmt = conn.createStatement();
 
         String sql = "INSERT INTO sessie (code, locatie, temperatuur, aantal, tijd) "
-                + "VALUES ('" + generatedCode + "','Amsterdam',15,1,'" + curDate + "')";
+                + "VALUES ('" + generatedCode + "','Amsterdam',15,'" + aantalFotos + "','" + curDate + "')";
         stmt.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
         rs = stmt.getGeneratedKeys();
 
@@ -68,7 +68,10 @@ public class SqlConnection {
             System.out.println("automatically generated key value = " + sessionID);
         }
 
-        insertFoto(sessionID, "TestOOP");
+        for (int i = 0; i < aantalFotos; i++) {
+            insertFoto(sessionID, listFotos[i]);
+        }
+        
 
         System.out.println("Inserted records into the table...");
 
