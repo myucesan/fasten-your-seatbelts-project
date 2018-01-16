@@ -15,6 +15,7 @@ public class Settings {
     
     private static int fotonummer = 0;   
     private static String session = PotoboothSession.randomAlphaNumeric();
+    private static final String CURRENTDATE = PotoboothSession.currentDateTime();
     private static Boolean burst = false;
     private static String[] fotoarray = new String[15];
     
@@ -45,6 +46,10 @@ public class Settings {
     
     public static String getSessionId(){     
         return session;
+    }
+    
+    public static String getCurrentDate(){     
+        return CURRENTDATE;
     }
     
 }
