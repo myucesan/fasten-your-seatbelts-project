@@ -5,6 +5,7 @@
  */
 package newphotoboothui;
 
+import database_Mail.SqlConnection;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
@@ -49,8 +50,10 @@ public class FXMLShowcaseController implements Initializable{
     Boolean burst;
     int aantalFotos = Settings.getFotnummer();
     int fotonummer = aantalFotos - 1;
-    String sessionid = Settings.getSessionId();
+    private final String sessionid = Settings.getSessionId();
+    private final String CURRENTDATETIME = Settings.getCurrentDate();
 
+    SqlConnection connection = new SqlConnection();
     
     public void setPicture(int pictureNumber){  
         File file = new File(fotos[pictureNumber]);
@@ -66,6 +69,19 @@ public class FXMLShowcaseController implements Initializable{
     
     
     public void verder(){
+        try {
+            String[] listFotos = Settings.getArray();
+            for (int i = 0; i < aantalFotos; i++) {
+                System.out.println(listFotos[i] + i);
+                FTPUploader.Upload(listFotos[i]);
+                FTPUploader.deleteFile(listFotos[i]);
+            }
+            
+            connection.Insert(sessionid, CURRENTDATETIME, listFotos, aantalFotos);
+            
+        } catch (Exception c) {
+            System.out.println(c);
+        }
         viewFades.FadeOut(rootPane, "FXMLCode.fxml");
         
     }
