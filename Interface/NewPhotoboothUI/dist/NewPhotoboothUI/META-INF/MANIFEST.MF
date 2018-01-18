@@ -1,0 +1,21 @@
+Manifest-Version: 1.0
+Implementation-Title: NewPhotoboothUI
+X-COMMENT: Main-Class will be added automatically by build
+Implementation-Version: 1.0
+Permissions: sandbox
+Codebase: *
+JavaFX-Version: 8.0
+Class-Path: lib/activation.jar lib/bridj-0.6.2.jar lib/commons-lang3-3
+ .7.jar lib/commons-net-3.6.jar lib/core-3.3.1.jar lib/javax.mail-1.6.
+ 0.jar lib/junit.jar lib/mysql-connector-java-5.1.23-bin.jar lib/pi4j-
+ core-javadoc.jar lib/pi4j-core-sources.jar lib/pi4j-core.jar lib/pi4j
+ -device-javadoc.jar lib/pi4j-device-sources.jar lib/pi4j-device.jar l
+ ib/pi4j-example-javadoc.jar lib/pi4j-example-sources.jar lib/pi4j-exa
+ mple.jar lib/pi4j-gpio-extension-javadoc.jar lib/pi4j-gpio-extension-
+ sources.jar lib/pi4j-gpio-extension.jar lib/pi4j-service-javadoc.jar 
+ lib/pi4j-service-sources.jar lib/pi4j-service.jar lib/slf4j-api-1.7.2
+ .jar lib/webcam-capture-0.3.10.jar
+Created-By: JavaFX Packager
+Implementation-Vendor: Koen
+Main-Class: newphotoboothui.NewPhotoboothUI
+

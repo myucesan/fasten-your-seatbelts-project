@@ -18,7 +18,7 @@ import org.apache.commons.net.ftp.FTPReply;
 public class FTPUploader {
 
     FTPClient ftp = null;
-    private static final String PATH = "F:\\HvA\\Homework\\Programming\\NewPhotoboothUI\\";
+    private static final String PATH = "";
     private static final String IMAGE_DIR = "/var/www/html/images/";
     private static final String HOST = "185.177.59.153";
     private static final String USER = "fys";

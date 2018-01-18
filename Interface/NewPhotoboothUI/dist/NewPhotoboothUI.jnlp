@@ -8,10 +8,15 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="NewPhotoboothUI.jar" size="433513" download="eager" />
+    <jar href="NewPhotoboothUI.jar" size="522092" download="eager" />
+    <jar href="lib\activation.jar" size="56290" download="eager" />
     <jar href="lib\bridj-0.6.2.jar" size="878674" download="eager" />
     <jar href="lib\commons-lang3-3.7.jar" size="499634" download="eager" />
+    <jar href="lib\commons-net-3.6.jar" size="307410" download="eager" />
+    <jar href="lib\core-3.3.1.jar" size="545396" download="eager" />
+    <jar href="lib\javax.mail-1.6.0.jar" size="653275" download="eager" />
     <jar href="lib\junit.jar" size="245039" download="eager" />
+    <jar href="lib\mysql-connector-java-5.1.23-bin.jar" size="834126" download="eager" />
     <jar href="lib\pi4j-core-javadoc.jar" size="1255902" download="eager" />
     <jar href="lib\pi4j-core-sources.jar" size="578816" download="eager" />
     <jar href="lib\pi4j-core.jar" size="537230" download="eager" />

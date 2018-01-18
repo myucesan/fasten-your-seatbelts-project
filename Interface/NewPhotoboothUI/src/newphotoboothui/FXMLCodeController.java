@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package newphotoboothui;
 
 import java.net.URL;
@@ -20,27 +15,22 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import database_Mail.EmailSend;
-import database_Mail.SendEmail;
 import database_Mail.SqlConnection;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.application.Application;
 import javafx.embed.swing.SwingFXUtils;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
+import javax.imageio.ImageIO;
 
 /**
  *
@@ -124,7 +114,20 @@ public class FXMLCodeController implements Initializable {
         }
 
 //        ImageView qrView = new ImageView();
-        qrCode.setImage(SwingFXUtils.toFXImage(bufferedImage, null));
+        File outputFile = new File("qr.jpg");
+        try {
+            ImageIO.write(bufferedImage, "jpg", outputFile);
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLCodeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        String localUrl;
+        try {
+            localUrl = outputFile.toURI().toURL().toString();
+            Image localImage = new Image(localUrl, true);
+            qrCode.setImage(localImage);
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(FXMLCodeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     @Override

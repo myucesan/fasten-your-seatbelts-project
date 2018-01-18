@@ -23,7 +23,7 @@
             <Font name="System Bold Italic" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="deleteButton" layoutX="466.0" layoutY="31.0" mnemonicParsing="false" onAction="#deleteFoto" style="-fx-max-height: 100px; -fx-max-width: 100px; -fx-background-color: red; -fx-min-height: 100px; -fx-min-width: 100px;" text="Delete" textFill="WHITE">
+      <Button fx:id="deleteButton" layoutX="466.0" layoutY="31.0" maxWidth="105.0" mnemonicParsing="false" onAction="#deleteFoto" prefHeight="100.0" prefWidth="105.0" style="-fx-max-height: 100px; -fx-max-width: 100px; -fx-background-color: red; -fx-min-height: 100px; -fx-min-width: 100px;" text="Delete" textFill="WHITE">
          <font>
             <Font name="System Bold Italic" size="18.0" />
          </font>

@@ -5,6 +5,7 @@
  */
 package newphotoboothui;
 
+import database_Mail.SqlConnection;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -36,11 +37,16 @@ public class FXMLShowcaseController implements Initializable{
     @FXML
     ImageView scrollBack;
     
+    SqlConnection connection = new SqlConnection();
+    
     public String[] fotos = Settings.getArray();
     Boolean burst;
     int aantalFotos = Settings.getFotnummer();
     int fotonummer = aantalFotos - 1;
     String sessionid = Settings.getSessionId();
+    private final String CURRENTDATETIME = Settings.getCurrentDate();
+    
+
 
     
     public void setPicture(int pictureNumber){  
@@ -57,6 +63,19 @@ public class FXMLShowcaseController implements Initializable{
     
     
     public void verder(){
+             try {
+            String[] listFotos = Settings.getArray();
+            for (int i = 0; i < aantalFotos; i++) {
+                System.out.println(listFotos[i] + i);
+                FTPUploader.Upload(listFotos[i]);
+                FTPUploader.deleteFile(listFotos[i]);
+            }
+            
+            connection.Insert(sessionid, CURRENTDATETIME, listFotos, aantalFotos, Settings.getTemp());
+            
+        } catch (Exception c) {
+            System.out.println(c);
+        }
         viewFades.FadeOut(rootPane, "FXMLCode.fxml");
         
     }

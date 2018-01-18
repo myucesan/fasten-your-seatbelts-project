@@ -2,11 +2,17 @@ package newphotoboothui;
 
 import com.github.sarxos.webcam.Webcam;
 import com.github.sarxos.webcam.WebcamResolution;
+import com.github.sarxos.webcam.ds.v4l4j.V4l4jDriver;
 import com.pi4j.component.servo.ServoDriver;
 import com.pi4j.component.servo.ServoProvider;
 import com.pi4j.component.servo.impl.RPIServoBlasterProvider;
+import com.pi4j.component.temperature.TemperatureSensor;
+import com.pi4j.component.temperature.impl.TmpDS18B20DeviceType;
 import com.pi4j.io.gpio.GpioController;
 import com.pi4j.io.gpio.GpioFactory;
+import com.pi4j.io.w1.W1Device;
+import com.pi4j.io.w1.W1Master;
+import com.sun.javafx.tk.Toolkit;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -27,6 +33,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.scene.control.Button;
 import gifwriter.GifSequenceWriter;
+import java.util.List;
+import javafx.scene.text.Text;
 
 /**
  *
@@ -34,13 +42,18 @@ import gifwriter.GifSequenceWriter;
  */
 public class FXMLFotoController implements Initializable {
     
+    static {
+           Webcam.setDriver(new V4l4jDriver());
+    }  
     
-
     @FXML
     AnchorPane rootPane;
 
     @FXML
     Button fotoButton;
+    
+    @FXML
+    Text tempText;
 
     @FXML
     ImageView imgWebCamCapturedImage;
@@ -54,6 +67,38 @@ public class FXMLFotoController implements Initializable {
 
     int cameraposition = 50;
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
+    public class SensorController {
+    // In lijst w1Devices alle temperatuur sensoren ophalen
+
+    W1Master master = new W1Master();
+    List<W1Device> w1Devices = master.getDevices(TmpDS18B20DeviceType.FAMILY_CODE);
+
+    public double getTemperature() {
+        double temperature = 0;
+        // Temperatuur checken voor elke temperatuur sensor; in dit geval één
+        for (W1Device device : w1Devices) {
+            //in de temperatuur variabele wordt de waarde opgeslagen afgerond op 1 decimaal
+            temperature = ((TemperatureSensor) device).getTemperature();
+        }
+        // temperatuur wordt teruggegeven aan de method call
+        return temperature;
+    }
+
+    
+    public void setTemp() {
+        double temp = getTemperature();
+        String text = "De tempratuur is: " + temp +"C";
+        tempText.setText(text);
+    }
+    
+
+    
     
     protected void initializeWebCam() {
         Task<Void> webCamIntilizer = new Task<Void>() {
@@ -93,9 +138,20 @@ public class FXMLFotoController implements Initializable {
 
                                 @Override
                                 public void run() {
-                                    final Image mainiamge = SwingFXUtils
-                                            .toFXImage(grabbedImage, null);
-                                    imageProperty.set(mainiamge);
+                                    File outputFile = new File("temp.jpg");
+                                    try {
+                                        ImageIO.write(grabbedImage, "jpg", outputFile);
+                                    } catch (IOException ex) {
+                                        Logger.getLogger(FXMLFotoController.class.getName()).log(Level.SEVERE, null, ex);
+                                    }
+                                    try {
+                                        String localUrl = outputFile.toURI().toURL().toString();
+                                        Image mainImage = new Image(localUrl, true);
+                                        imageProperty.set(mainImage);
+                                    } catch (IOException ex) {
+                                        Logger.getLogger(FXMLFotoController.class.getName()).log(Level.SEVERE, null, ex);
+                                    }
+                                    
                                 }
                             });
 
@@ -117,6 +173,8 @@ public class FXMLFotoController implements Initializable {
         imgWebCamCapturedImage.imageProperty().bind(imageProperty);
 
     }
+    
+   
 
     public void makePicture() {
         int fotoid = Settings.getFotoid();
@@ -189,17 +247,19 @@ public class FXMLFotoController implements Initializable {
 
         final GpioController gpio = GpioFactory.getInstance();
         ServoProvider servoProvider = new RPIServoBlasterProvider();
-        ServoDriver servo = servoProvider.getServoDriver(servoProvider.getDefinedServoPins().get(2));
+        ServoDriver servo = servoProvider.getServoDriver(servoProvider.getDefinedServoPins().get(6));
         return servo;
     }
 
     public void cameraTurnRight() {
         try {
             ServoDriver servo = initServo();
-            for (int i = 20; i > 0; i--) {
-                cameraposition--;
-                servo.setServoPulseWidth(cameraposition); // Set raw value for this servo driver - 50 to 195
-                Thread.sleep(10);
+            if (cameraposition > 50) {
+                for (int i = 20; i > 0; i--) {
+                    cameraposition--;
+                    servo.setServoPulseWidth(cameraposition); // Set raw value for this servo driver - 50 to 195
+                    Thread.sleep(10);
+                }
             }
         } catch (Exception ex) {
             System.err.println("Fout bij sleep: " + ex);
@@ -209,17 +269,19 @@ public class FXMLFotoController implements Initializable {
     public void cameraTurnLeft() {
         try {
             ServoDriver servo = initServo();
-            for (int i = 20; i > 0; i--) {
-                cameraposition++;
-                servo.setServoPulseWidth(cameraposition); // Set raw value for this servo driver - 50 to 195
-                Thread.sleep(10);
+            if (cameraposition< 250){
+                for (int i = 20; i > 0; i--) {
+                    cameraposition++;
+                    servo.setServoPulseWidth(cameraposition); // Set raw value for this servo driver - 50 to 195
+                    Thread.sleep(10);
+                }
             }
         } catch (Exception ex) {
             System.err.println("Fout bij sleep: " + ex);
         }
     }
 
-    @Override
+  
     public void initialize(URL location, ResourceBundle resources) {
         initializeWebCam();
         fotoButton.setVisible(false);
@@ -227,5 +289,5 @@ public class FXMLFotoController implements Initializable {
         Image loading = new Image(FXMLFotoController.class.getResourceAsStream("load.gif"));
         imgWebCamCapturedImage.setImage(loading);
     }
-
+    }
 }

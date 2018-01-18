@@ -7,7 +7,6 @@ package newphotoboothui;
 
 import com.github.sarxos.webcam.Webcam;
 import database_Mail.PotoboothSession;
-import java.util.Arrays;
 
 /**
  *
@@ -22,6 +21,18 @@ public class Settings {
     private static String[] fotoarray = new String[15];
     private static Thread th;
     private static Webcam sellWebcam = null;
+    private static final String CURRENTDATE = PotoboothSession.currentDateTime();
+    private static int temp;
+    
+    
+    public static void genNewSession(){
+       session = PotoboothSession.randomAlphaNumeric();
+    }
+    
+    public static void setTemp(int temp){
+        Settings.temp = temp;
+    }
+    
     
     public static void setFotonummer(int fotonummer){     
         Settings.fotonummer = fotonummer;
@@ -40,7 +51,7 @@ public class Settings {
     }
     
     public static void replaceArray(String[] array) {
-        Settings.fotoarray = Arrays.copyOf(array, array.length);
+        fotoarray = array;
     }
     
     public static int getFotoid(){
@@ -62,5 +73,14 @@ public class Settings {
     public static String getSessionId(){     
         return session;
     }
+    
+    public static String getCurrentDate(){     
+        return CURRENTDATE;
+    }
+
+    public static int getTemp(){
+        return temp;
+    }
+    
     
 }

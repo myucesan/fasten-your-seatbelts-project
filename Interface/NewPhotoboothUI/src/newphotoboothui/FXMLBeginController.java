@@ -6,8 +6,10 @@
 package newphotoboothui;
 
 import com.github.sarxos.webcam.Webcam;
+import database_Mail.SqlConnection;
 import java.awt.image.BufferedImage;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -32,12 +34,18 @@ public class FXMLBeginController  implements Initializable{
     private ObjectProperty<Image> imageProperty = new SimpleObjectProperty<Image>();
     private boolean cameraAan = true;
     private BufferedImage grabbedImage;
-  
+    SqlConnection connection = new SqlConnection();
         
     
-    public void beginButton() {
-        viewFades.FadeOut(rootPane, "FXMLMode.fxml");
+    public void beginButton() throws SQLException {
         
+        viewFades.FadeOut(rootPane, "FXMLMode.fxml");
+        try {
+            connection.Open();
+            connection.Remove();
+        } catch (ClassNotFoundException | SQLException c) {
+            System.out.println(c);
+        }
     }
     
     
