@@ -48,7 +48,7 @@ public class FXMLShowcaseController implements Initializable{
     
 
 
-    
+    //set fotos uit array op imageview
     public void setPicture(int pictureNumber){  
         File file = new File(fotos[pictureNumber]);
         try {
@@ -61,10 +61,11 @@ public class FXMLShowcaseController implements Initializable{
         
     }
     
-    
+    //upload fotos naar server en laad nieuwe window in
     public void verder(){
              try {
             String[] listFotos = Settings.getArray();
+            // loop upload fotos 1 voor 1 naar de server
             for (int i = 0; i < aantalFotos; i++) {
                 System.out.println(listFotos[i] + i);
                 FTPUploader.Upload(listFotos[i]);
@@ -76,10 +77,12 @@ public class FXMLShowcaseController implements Initializable{
         } catch (Exception c) {
             System.out.println(c);
         }
+             //inladen nieuwe window
         viewFades.FadeOut(rootPane, "FXMLCode.fxml");
         
     }
     
+    //inladen oude window om nog een foto te maken
     public void nogEenFoto(){
         viewFades.FadeOut(rootPane, "FXMLMode.fxml");
          

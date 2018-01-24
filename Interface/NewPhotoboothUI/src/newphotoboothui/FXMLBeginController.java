@@ -38,6 +38,7 @@ public class FXMLBeginController  implements Initializable{
         
     
     public void beginButton() throws SQLException {
+        //inladen window
         viewFades.FadeOut(rootPane, "FXMLMode.fxml");
     }
     
@@ -48,6 +49,7 @@ public class FXMLBeginController  implements Initializable{
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        // verbinding met de database
          try {
             connection.Open();
             connection.Remove();
