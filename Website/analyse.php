@@ -77,7 +77,23 @@
       <div class="bg-faded p-4 my-4">
         <div class="row">
 		<!-- hier is de informatie voor de admin pagina -->
-			<table class="tabel">
+		
+		
+        <html>
+        <head>
+	        <style>
+	        table, th, td {
+		        border: 1px solid black;
+		        text-align: center;
+	            }
+	        th{
+	        	text-align: center;
+	            }
+        	</style>
+        </head>
+        <body>
+		
+			<table style="width:100%">
 			  <tr>
 				<th>Aatnal Sessie's</th> 
 				<th>Aantal Foto's</th>
