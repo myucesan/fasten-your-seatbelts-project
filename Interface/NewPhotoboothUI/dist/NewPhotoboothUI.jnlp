@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="NewPhotoboothUI.jar" size="522092" download="eager" />
+    <jar href="NewPhotoboothUI.jar" size="442845" download="eager" />
     <jar href="lib\activation.jar" size="56290" download="eager" />
     <jar href="lib\bridj-0.6.2.jar" size="878674" download="eager" />
     <jar href="lib\commons-lang3-3.7.jar" size="499634" download="eager" />
@@ -33,7 +33,9 @@
     <jar href="lib\pi4j-service-sources.jar" size="18044" download="eager" />
     <jar href="lib\pi4j-service.jar" size="19063" download="eager" />
     <jar href="lib\slf4j-api-1.7.2.jar" size="26083" download="eager" />
+    <jar href="lib\v4l4j-0.9.1-r507.jar" size="197779" download="eager" />
     <jar href="lib\webcam-capture-0.3.10.jar" size="409084" download="eager" />
+    <jar href="lib\webcam-capture-driver-v4l4j-0.3.13-SNAPSHOT.jar" size="11375" download="eager" />
   </resources>
   <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="NewPhotoboothUI" >
     <param name="requiredFXVersion" value="8.0+"/>

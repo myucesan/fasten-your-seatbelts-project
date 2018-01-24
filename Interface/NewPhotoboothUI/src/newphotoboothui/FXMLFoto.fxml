@@ -27,6 +27,6 @@
          </image>
       </ImageView>
       <Button fx:id="fotoButton" layoutX="469.0" layoutY="132.0" mnemonicParsing="false" onAction="#makePicture" style="-fx-background-radius: 1000px; -fx-min-height: 100px; -fx-min-width: 100px; -fx-background-image: transparant; -fx-background-position: center; -fx-background-size: 100% 100%; -fx-background-color: transparant;" />
-      <Text fx:id="temptext" layoutX="483.0" layoutY="277.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="71.13671875" />
+      <Text fx:id="tempText" layoutX="431.0" layoutY="293.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="125.13671875" />
    </children>
 </AnchorPane>

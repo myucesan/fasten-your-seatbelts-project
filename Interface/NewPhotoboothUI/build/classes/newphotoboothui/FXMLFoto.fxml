@@ -4,8 +4,9 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="302.0" prefWidth="600.0" style="-fx-background-image: url(&quot;file:images/photobooth-wallpaper.jpeg&quot;);" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="newphotoboothui.FXMLFotoController">
+<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="302.0" prefWidth="600.0" style="-fx-background-image: url(&quot;file:images/photobooth-wallpaper.jpeg&quot;);" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="newphotoboothui.FXMLFotoController">
    <children>
       <ImageView fx:id="imgWebCamCapturedImage" fitHeight="250.0" fitWidth="440.0" layoutX="4.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fitHeight="107.0" fitWidth="100.0" layoutX="14.0" layoutY="257.0" pickOnBounds="true" preserveRatio="true">
@@ -26,5 +27,6 @@
          </image>
       </ImageView>
       <Button fx:id="fotoButton" layoutX="469.0" layoutY="132.0" mnemonicParsing="false" onAction="#makePicture" style="-fx-background-radius: 1000px; -fx-min-height: 100px; -fx-min-width: 100px; -fx-background-image: transparant; -fx-background-position: center; -fx-background-size: 100% 100%; -fx-background-color: transparant;" />
+      <Text fx:id="tempText" layoutX="431.0" layoutY="293.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="125.13671875" />
    </children>
 </AnchorPane>

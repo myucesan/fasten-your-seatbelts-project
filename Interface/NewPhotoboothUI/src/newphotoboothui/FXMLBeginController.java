@@ -38,19 +38,23 @@ public class FXMLBeginController  implements Initializable{
         
     
     public void beginButton() throws SQLException {
-        
         viewFades.FadeOut(rootPane, "FXMLMode.fxml");
-        try {
+    }
+    
+
+    
+    
+    
+    
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+         try {
             connection.Open();
             connection.Remove();
         } catch (ClassNotFoundException | SQLException c) {
             System.out.println(c);
         }
-    }
-    
-    
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+        
     }
     
 }

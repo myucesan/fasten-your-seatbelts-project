@@ -76,7 +76,9 @@ public class FXMLCodeController implements Initializable {
         } catch (SQLException c) {
             System.out.println(c);
         }
-
+       Settings.genNewSession();
+       Settings.setFotonummer(0);
+       Settings.setFotoid(0);
        viewFades.FadeOut(rootPane, "FXMLBegin.fxml");
     }
 
