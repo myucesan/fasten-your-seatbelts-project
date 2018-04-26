@@ -13,7 +13,7 @@ public class EmailSend {
 
     private static final String HOST = "smtp.gmail.com";
     private static final String USER = "alfredez008@gmail.com";
-    private static final String PASS = "Omegazer0";
+    private static final String PASS = "";
     private static final String FROM = "john@doe.com";
     private static final String SUBJECT = "Corendon Resort - Dreambox";
     private static final boolean SESSION_DEBUG = false;
